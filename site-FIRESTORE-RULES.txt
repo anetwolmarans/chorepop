@@ -1,0 +1,45 @@
+rules_version = '2';
+
+// ChorePop — Firestore security rules (launch version)
+//
+// Every device signs in with Firebase Anonymous Auth, so "signed in" covers
+// all real app users. Data lives under households/{id}/... — members/chores/
+// completions/payments are subcollections. Billing is client-enforced in this
+// version (documented trade-off); Cloud Functions can harden it later.
+//
+// Paste this whole file in: Firebase console → Firestore Database → Rules.
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    match /households/{hid} {
+      // Join-by-code and app reads need to query households
+      allow read: if request.auth != null;
+
+      // Creating a family: signed-in users only, with a few sanity checks
+      allow create: if request.auth != null
+        && request.resource.data.name is string
+        && request.resource.data.name.size() > 0
+        && request.resource.data.name.size() <= 40
+        && request.resource.data.joinCode is string
+        && request.resource.data.joinCode.size() == 6;
+
+      // Normal app operation writes billing fields on the household doc
+      allow update: if request.auth != null;
+
+      // Only the device that created the household may delete it
+      allow delete: if request.auth != null
+        && resource.data.ownerUid == request.auth.uid;
+
+      // Members, chores, completions, payments — subcollections
+      match /{subcollection=**} {
+        allow read, write: if request.auth != null;
+      }
+    }
+
+    // Everything else is locked
+    match /{other=**} {
+      allow read, write: if false;
+    }
+  }
+}
