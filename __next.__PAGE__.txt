@@ -1,0 +1,6 @@
+1:"$Sreact.fragment"
+2:I[23056,["/chorepop/_next/static/chunks/451a9c3c6e66d39d.js","/chorepop/_next/static/chunks/46b629e6693c39ff.js","/chorepop/_next/static/chunks/19476e3113222e63.js"],"AppGate"]
+3:I[5808,["/chorepop/_next/static/chunks/69bce0a344e5b514.js"],"OutletBoundary"]
+4:"$Sreact.suspense"
+0:{"buildId":"KkfsNcQClF8oqnPJpvf1h","rsc":["$","$1","c",{"children":[["$","$L2",null,{}],[["$","script","script-0",{"src":"/chorepop/_next/static/chunks/19476e3113222e63.js","async":true}]],["$","$L3",null,{"children":["$","$4",null,{"name":"Next.MetadataOutlet","children":"$@5"}]}]]}],"loading":null,"isPartial":false}
+5:null
