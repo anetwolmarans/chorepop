@@ -1,5 +1,5 @@
 /* ChorePop service worker — offline app shell for Android install */
-const CACHE = 'chorepop-v5'
+const CACHE = 'chorepop-v14'
 const BASE = '/chorepop'
 const SHELL = [
   `${BASE}/`,
